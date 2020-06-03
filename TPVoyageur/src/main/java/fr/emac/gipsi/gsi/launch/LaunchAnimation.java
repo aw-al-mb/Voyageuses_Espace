@@ -28,19 +28,27 @@ public class LaunchAnimation {
 
 		aa.wait(1000);
 		
-		AbstractAnimation ab = new AnimationFlash();
+		AbstractAnimation ab = new AnimationLigne();
 		ab.setEcranDeb(ListScreen.second());
-		ab.setEcranFin(ListScreen.first());
+		ab.setEcranFin(ListScreen.Plage());
 
 		ab.runAnimation();
 		
 		ab.wait(1000);
 		
-		AbstractAnimation ac = new AnimationLigne();
-		ac.setEcranDeb(ListScreen.second());
-		ac.setEcranFin(ListScreen.first());
+		AbstractAnimation ac = new AnimationByColumn();
+		ac.setEcranDeb(ListScreen.Plage());
+		ac.setEcranFin(ListScreen.Pokeball());
 
 		ac.runAnimation();
+		
+		ac.wait(1000);
+		
+		AbstractAnimation ad = new AnimationLigne();
+		ad.setEcranDeb(ListScreen.Pokeball());
+		ad.setEcranFin(ListScreen.Plage());
+
+		ad.runAnimation();
 
 	}
 
