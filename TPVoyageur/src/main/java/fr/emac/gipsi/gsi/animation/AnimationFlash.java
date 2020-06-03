@@ -7,7 +7,7 @@ import fr.emac.gipsi.gsi.screen.Screen;
 
 /**
  * @author Truptil Sebastien - sebastien.truptil@gmail.com
- *
+ * Animation débile : on remplace l'image par l'autre sans animations cools
  */
 public class AnimationFlash extends AbstractAnimation {
 

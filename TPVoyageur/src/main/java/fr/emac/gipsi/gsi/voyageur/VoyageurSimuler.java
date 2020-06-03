@@ -15,7 +15,8 @@ public class VoyageurSimuler extends AbstractVoyageur {
     public VoyageurSimuler() {
         // TODO Auto-generated constructor stub
     }
-
+    
+    /* Le robot se deplace dans la direction où il regarde */
     /* (non-Javadoc)
      * @see fr.emac.gipsi.gsi.voyageur.AbstractVoyageur#forward()
      */
