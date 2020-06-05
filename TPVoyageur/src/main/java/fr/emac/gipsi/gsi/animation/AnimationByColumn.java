@@ -22,6 +22,7 @@ public class AnimationByColumn extends AbstractAnimation{
 	public void runAnimation() {
 		showScreen(ecranDeb); //ecran du début
 		ecranInt=copyScreen(ecranDeb); 
+		
 		// pour chaque pixel de cette colonne de l'image du début on les remplace par les pixels de l'image de fin
 		for(int col=0;col<ecranInt.getColMax()+1;col++){ 
 			System.out.println("startSend");

@@ -23,25 +23,73 @@ public class VoyageurSimuler extends AbstractVoyageur {
     @Override
     protected void forward() {
         // TODO Auto-generated method stub
+   	setPosBody(getPosTete());
+    if(getDirection()=="E") {
+		 getPosTete().setY(getPosTete().getY()+1);
+     }
+     else if(getDirection()=="N") {
+         getPosTete().setX(getPosTete().getX()-1);
+     }
+     else if(getDirection()=="O") {
+    	 getPosTete().setY(getPosTete().getY()-1);
+     }
+     else {
+    	 getPosTete().setX(getPosTete().getX()+1);
+     }
 
     }
 
+    
     /* (non-Javadoc)
      * @see fr.emac.gipsi.gsi.voyageur.AbstractVoyageur#backward()
      */
     @Override
     protected void backward() {
         // TODO Auto-generated method stub
-
+       	setPosTete(getPosBody());
+        if(getDirection()=="E") {
+    		 getPosBody().setY(getPosBody().getY()-1);
+         }
+         else if(getDirection()=="N") {
+             getPosBody().setX(getPosBody().getX()+1);
+         }
+         else if(getDirection()=="O") {
+        	 getPosBody().setY(getPosBody().getY()+1);
+         }
+         else {
+        	 getPosBody().setX(getPosBody().getX()-1);
+         }
     }
 
+    
     /* (non-Javadoc)
      * @see fr.emac.gipsi.gsi.voyageur.AbstractVoyageur#left()
      */
     @Override
     protected void left() {
         // TODO Auto-generated method stub
-    }
+    	 if(getDirection()=="E") {
+    		 getPosTete().setX(getPosTete().getX()-1);
+    		 getPosTete().setY(getPosTete().getY()-1);
+             setDirection("N");
+         }
+         else if(getDirection()=="N") {
+             getPosTete().setX(getPosTete().getX()+1);
+             getPosTete().setY(getPosTete().getY()-1);
+             setDirection("O");
+         }
+         else if(getDirection()=="O") {
+        	 getPosTete().setX(getPosTete().getX()+1);
+             getPosTete().setY(getPosTete().getY()+1);
+             setDirection("S");
+         }
+         else {
+        	 getPosTete().setX(getPosTete().getX()-1);
+             getPosTete().setY(getPosTete().getY()+1);
+             setDirection("E");
+         }
+     }
+    
 
     /* (non-Javadoc)
      * @see fr.emac.gipsi.gsi.voyageur.AbstractVoyageur#right()
@@ -49,5 +97,26 @@ public class VoyageurSimuler extends AbstractVoyageur {
     @Override
     protected void right() {
         // TODO Auto-generated method stub
+   	 if(getDirection()=="E") {
+		 getPosTete().setX(getPosTete().getX()+1);
+		 getPosTete().setY(getPosTete().getY()-1);
+         setDirection("S");
+     }
+     else if(getDirection()=="N") {
+         getPosTete().setX(getPosTete().getX()+1);
+         getPosTete().setY(getPosTete().getY()+1);
+         setDirection("E");
+     }
+     else if(getDirection()=="O") {
+    	 getPosTete().setX(getPosTete().getX()-1);
+         getPosTete().setY(getPosTete().getY()+1);
+         setDirection("N");
+     }
+     else {
+    	 getPosTete().setX(getPosTete().getX()-1);
+         getPosTete().setY(getPosTete().getY()-1);
+         setDirection("O");
     }
+}
+    
 }

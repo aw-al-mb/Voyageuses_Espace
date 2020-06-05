@@ -5,8 +5,11 @@ package fr.emac.gipsi.gsi.launch;
 
 import fr.emac.gipsi.gsi.animation.AbstractAnimation;
 import fr.emac.gipsi.gsi.animation.AnimationByColumn;
+import fr.emac.gipsi.gsi.animation.AnimationCross;
 import fr.emac.gipsi.gsi.animation.AnimationFlash;
 import fr.emac.gipsi.gsi.animation.AnimationLigne;
+import fr.emac.gipsi.gsi.animation.AnimationRandomPop;
+import fr.emac.gipsi.gsi.animation.AnimationSpirale;
 import fr.emac.gipsi.gsi.ecran.ListScreen;
 
 /**
@@ -20,23 +23,23 @@ public class LaunchAnimation {
 	 */
 	public static void main(String[] args) {
 		
-		AbstractAnimation aa = new AnimationByColumn();
+		AbstractAnimation aa = new AnimationRandomPop();
 		aa.setEcranDeb(ListScreen.first());
-		aa.setEcranFin(ListScreen.second());
+		aa.setEcranFin(ListScreen.Couleurs());
 		
 		aa.runAnimation();
 
 		aa.wait(1000);
 		
 		AbstractAnimation ab = new AnimationLigne();
-		ab.setEcranDeb(ListScreen.second());
+		ab.setEcranDeb(ListScreen.Couleurs());
 		ab.setEcranFin(ListScreen.Plage());
 
 		ab.runAnimation();
 		
 		ab.wait(1000);
 		
-		AbstractAnimation ac = new AnimationByColumn();
+		AbstractAnimation ac = new AnimationCross();
 		ac.setEcranDeb(ListScreen.Plage());
 		ac.setEcranFin(ListScreen.Pokeball());
 
@@ -44,11 +47,19 @@ public class LaunchAnimation {
 		
 		ac.wait(1000);
 		
-		AbstractAnimation ad = new AnimationLigne();
+		AbstractAnimation ad = new AnimationSpirale();
 		ad.setEcranDeb(ListScreen.Pokeball());
-		ad.setEcranFin(ListScreen.Plage());
-
+		ad.setEcranFin(ListScreen.second());
+		
 		ad.runAnimation();
+		
+		ad.wait(1000);
+		
+		AbstractAnimation ae = new AnimationByColumn();
+		ae.setEcranDeb(ListScreen.second());
+		ae.setEcranFin(ListScreen.ArcCiel());
+
+		ae.runAnimation();
 
 	}
 
