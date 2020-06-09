@@ -96,6 +96,4 @@ public class Position {
 		return "Position [x=" + x + ", y=" + y + "]";
 	}
 
-	
-	
 }

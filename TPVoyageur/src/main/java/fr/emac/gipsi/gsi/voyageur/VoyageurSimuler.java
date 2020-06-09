@@ -22,7 +22,7 @@ public class VoyageurSimuler extends AbstractVoyageur {
      */
     @Override
     protected void forward() {
-        // TODO Auto-generated method stub
+
    	setPosBody(getPosTete());
     if(getDirection()=="E") {
 		 getPosTete().setY(getPosTete().getY()+1);
@@ -45,7 +45,7 @@ public class VoyageurSimuler extends AbstractVoyageur {
      */
     @Override
     protected void backward() {
-        // TODO Auto-generated method stub
+
        	setPosTete(getPosBody());
         if(getDirection()=="E") {
     		 getPosBody().setY(getPosBody().getY()-1);
@@ -67,8 +67,8 @@ public class VoyageurSimuler extends AbstractVoyageur {
      */
     @Override
     protected void left() {
-        // TODO Auto-generated method stub
-    	 if(getDirection()=="E") {
+
+    	if(getDirection()=="E") {
     		 getPosTete().setX(getPosTete().getX()-1);
     		 getPosTete().setY(getPosTete().getY()-1);
              setDirection("N");
@@ -96,7 +96,7 @@ public class VoyageurSimuler extends AbstractVoyageur {
      */
     @Override
     protected void right() {
-        // TODO Auto-generated method stub
+    	
    	 if(getDirection()=="E") {
 		 getPosTete().setX(getPosTete().getX()+1);
 		 getPosTete().setY(getPosTete().getY()-1);

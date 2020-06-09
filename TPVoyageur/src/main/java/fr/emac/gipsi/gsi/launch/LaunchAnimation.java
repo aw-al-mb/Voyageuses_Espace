@@ -7,6 +7,7 @@ import fr.emac.gipsi.gsi.animation.AbstractAnimation;
 import fr.emac.gipsi.gsi.animation.AnimationByColumn;
 import fr.emac.gipsi.gsi.animation.AnimationCross;
 import fr.emac.gipsi.gsi.animation.AnimationFlash;
+import fr.emac.gipsi.gsi.animation.AnimationGoutte;
 import fr.emac.gipsi.gsi.animation.AnimationLigne;
 import fr.emac.gipsi.gsi.animation.AnimationRandomPop;
 import fr.emac.gipsi.gsi.animation.AnimationSpirale;
@@ -23,7 +24,7 @@ public class LaunchAnimation {
 	 */
 	public static void main(String[] args) {
 		
-		AbstractAnimation aa = new AnimationRandomPop();
+		AbstractAnimation aa = new AnimationGoutte();
 		aa.setEcranDeb(ListScreen.first());
 		aa.setEcranFin(ListScreen.Couleurs());
 		
