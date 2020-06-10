@@ -9,6 +9,7 @@ import fr.emac.gipsi.gsi.animation.AnimationCross;
 import fr.emac.gipsi.gsi.animation.AnimationFlash;
 import fr.emac.gipsi.gsi.animation.AnimationGoutte;
 import fr.emac.gipsi.gsi.animation.AnimationLigne;
+import fr.emac.gipsi.gsi.animation.AnimationNyanCat;
 import fr.emac.gipsi.gsi.animation.AnimationRandomPop;
 import fr.emac.gipsi.gsi.animation.AnimationSpirale;
 import fr.emac.gipsi.gsi.ecran.ListScreen;
@@ -61,6 +62,13 @@ public class LaunchAnimation {
 		ae.setEcranFin(ListScreen.ArcCiel());
 
 		ae.runAnimation();
+		
+		ae.wait(1000);
+		
+		AbstractAnimation af = new AnimationNyanCat();
+		af.setEcranFin(ListScreen.NyanCat());
+		af.runAnimation();
+		
 
 	}
 
