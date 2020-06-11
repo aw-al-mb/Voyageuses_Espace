@@ -74,8 +74,8 @@ public class LaunchVoyage {
 		pokemon.setImage(ListScreen.Pokeball());
 		pokemon.setEchantillonRoche(ListScreen.Pokeball());
 		pokemon.setEchantillonSol(ListScreen.Pokeball());
-		pokemon.getPos().setX(11);
-		pokemon.getPos().setY(9);
+		pokemon.getPos().setX(9);
+		pokemon.getPos().setY(7);
 		pokemon.getListAccessibilite().add(plage);
 		pokemon.getListVisibilite().add(plage);
 		
@@ -147,9 +147,9 @@ public class LaunchVoyage {
 		AbstractVoyageur simulatedVoyageur = new VoyageurSimuler();
 		
 		simulatedVoyageur.getPosTete().setX(listPlanete.get(0).getPos().getX());
-		simulatedVoyageur.getPosTete().setY(listPlanete.get(0).getPos().getY());
+		simulatedVoyageur.getPosTete().setY(listPlanete.get(0).getPos().getY()+1);
 		simulatedVoyageur.getPosBody().setX(listPlanete.get(0).getPos().getX());
-		simulatedVoyageur.getPosBody().setY(listPlanete.get(0).getPos().getY()-1); // la tete regarde vers la droite
+		simulatedVoyageur.getPosBody().setY(listPlanete.get(0).getPos().getY()); // la tete regarde vers la droite
 		simulatedVoyageur.setDirection("E");
 		
 		
