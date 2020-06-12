@@ -88,7 +88,6 @@ public class InterfaceSimulation extends JFrame {
 		txtPower.setColumns(10);
 		
 //		
-//		txtRange = new JTextField();
 //		txtRange.setText("Range");
 //		panel_1.add(txtRange);
 //		txtRange.setColumns(10);

@@ -3,6 +3,9 @@
  */
 package fr.emac.gipsi.gsi.voyage;
 
+import fr.emac.gipsi.gsi.animation.AnimationGoutte;
+import fr.emac.gipsi.gsi.animation.AnimationNyanCat;
+import fr.emac.gipsi.gsi.animation.AnimationSpirale;
 import fr.emac.gipsi.gsi.voyageur.AbstractVoyageur;
 
 import java.util.ArrayList;
@@ -58,7 +61,51 @@ public class Voyage extends AbstractVoyage {
         // TODO Auto-generated method stub
 
     }
-    public void deplacement(Planete depart, AbstractVoyageur voyageur, Planete arrivee) { 
+    /* Prend les photos et échantillons lors de l'arrivée sur une nouvelle planète */
+    public void arriveeSurPlanete(AbstractVoyageur voyageur, Planete arrivee, AnimationGoutte animPhoto, AnimationSpirale animSol, AnimationNyanCat animRoche) {
+    	if (!voyageur.getAlreadyVisit().contains(arrivee)){
+    		/* Prendre la photo de la planète */
+    		voyageur.takePicture(arrivee);
+    		animPhoto.setEcranDeb(getEcran());
+    		animPhoto.setEcranFin(arrivee.getImage());
+    		animPhoto.runAnimation();
+    		wait(1000);
+    		animPhoto.setEcranDeb(arrivee.getImage());
+    		animPhoto.setEcranFin(getEcran());
+    		animPhoto.runAnimation();
+    		afficheEcran();
+    		
+    		if (arrivee.getEchantillonSol() != null) {
+    			/* Prendre un echantillon de sol si il y en a */
+    			voyageur.takeEchantillonSol(arrivee);
+    			animSol.setEcranDeb(getEcran());
+    			animSol.setEcranFin(arrivee.getEchantillonSol());
+    			animSol.runAnimation();
+    			wait(1000);
+    			animSol.setEcranDeb(arrivee.getEchantillonSol());
+    			animSol.setEcranFin(getEcran());
+    			animSol.runAnimation();
+    			afficheEcran();
+    		}
+    		
+    		if (arrivee.getEchantillonRoche() != null) {
+    			/* prendre un echantillon de */
+    			voyageur.takeEchantillonRoche(arrivee);    			
+    			animRoche.setEcranDeb(getEcran());
+    			animRoche.setEcranFin(arrivee.getEchantillonRoche());
+    			animRoche.runAnimation();
+    			wait(1000);
+    			animRoche.setEcranDeb(arrivee.getEchantillonRoche());
+    			animRoche.setEcranFin(getEcran());
+    			animRoche.runAnimation();
+    			afficheEcran();
+    		}
+    		voyageur.getAlreadyVisit().add(arrivee);
+    	}
+    }
+    
+    /* déplace le robot d'une planète de depart à une planete d'arrivee */
+    public void deplacement(Planete depart, AbstractVoyageur voyageur, Planete arrivee, AnimationGoutte animPhoto, AnimationSpirale animSol, AnimationNyanCat animRoche) { 
     	int DiffX=arrivee.getPos().getX()-depart.getPos().getX(); /*distance départ-arrivée selon l’axe x*/
     	int DiffY=arrivee.getPos().getY()-depart.getPos().getY();/*distance départ-arrivée selon l’axe y*/
     	if (voyageur.getDirection()=="E") { // le voyageur regarder vers la droite 
@@ -207,6 +254,7 @@ public class Voyage extends AbstractVoyage {
     			}
     		}
     	}
+    	/* arriveeSurPlanete(voyageur, arrivee, animPhoto, animSol, animRoche);*/
     }
  
     /* (non-Javadoc)
@@ -215,9 +263,13 @@ public class Voyage extends AbstractVoyage {
     @Override
     public void lancementSimuler() {
         // TODO Auto-generated method stub 
+		AnimationGoutte anim1 = new AnimationGoutte();
+		AnimationSpirale anim2 = new AnimationSpirale();
+		AnimationNyanCat anim3 = new AnimationNyanCat();
     	afficheEcran();
     	wait(1000);
-    	deplacement(listPlanete.get(0), getSimulatedvoyageur(),listPlanete.get(3));
-        
+    	for( int i=0; i<listPlanete.size()-1; i++) {
+    		deplacement(listPlanete.get(i), getSimulatedvoyageur(),listPlanete.get(i+1),anim1,anim2,anim3);
+    	}
     }
 }

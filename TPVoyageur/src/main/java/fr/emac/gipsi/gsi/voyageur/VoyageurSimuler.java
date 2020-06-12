@@ -49,18 +49,21 @@ public class VoyageurSimuler extends AbstractVoyageur {
     @Override
     protected void backward() {
 
-       	setPosTete(getPosBody());
         if(getDirection()=="E") {
     		 getPosBody().setY(getPosBody().getY()-1);
+    		 getPosTete().setY(getPosTete().getY()-1);
          }
          else if(getDirection()=="N") {
              getPosBody().setX(getPosBody().getX()+1);
+             getPosTete().setX(getPosTete().getX()+1);
          }
          else if(getDirection()=="O") {
         	 getPosBody().setY(getPosBody().getY()+1);
+        	 getPosTete().setY(getPosTete().getY()+1);
          }
          else {
         	 getPosBody().setX(getPosBody().getX()-1);
+        	 getPosTete().setX(getPosTete().getX()-1);
          }
     }
 

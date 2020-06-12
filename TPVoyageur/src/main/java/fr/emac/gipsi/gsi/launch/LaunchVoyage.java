@@ -74,7 +74,7 @@ public class LaunchVoyage {
 		pokemon.setImage(ListScreen.Pokeball());
 		pokemon.setEchantillonRoche(ListScreen.Pokeball());
 		pokemon.setEchantillonSol(ListScreen.Pokeball());
-		pokemon.getPos().setX(9);
+		pokemon.getPos().setX(8);
 		pokemon.getPos().setY(7);
 		pokemon.getListAccessibilite().add(plage);
 		pokemon.getListVisibilite().add(plage);
@@ -119,7 +119,7 @@ public class LaunchVoyage {
 		rainbow.setImage(ListScreen.ArcCiel());
 		rainbow.setEchantillonRoche(ListScreen.ArcCiel());
 		rainbow.setEchantillonSol(ListScreen.ArcCiel());
-		rainbow.getPos().setX(9);
+		rainbow.getPos().setX(7);
 		rainbow.getPos().setY(10);
 		rainbow.getListAccessibilite().add(pokemon);
 		rainbow.getListVisibilite().add(pokemon);
