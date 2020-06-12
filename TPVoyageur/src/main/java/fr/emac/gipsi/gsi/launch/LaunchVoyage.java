@@ -120,7 +120,7 @@ public class LaunchVoyage {
 		rainbow.setEchantillonRoche(ListScreen.ArcCiel());
 		rainbow.setEchantillonSol(ListScreen.ArcCiel());
 		rainbow.getPos().setX(7);
-		rainbow.getPos().setY(10);
+		rainbow.getPos().setY(5);
 		rainbow.getListAccessibilite().add(pokemon);
 		rainbow.getListVisibilite().add(pokemon);
 		rainbow.getListAccessibilite().add(colore);
