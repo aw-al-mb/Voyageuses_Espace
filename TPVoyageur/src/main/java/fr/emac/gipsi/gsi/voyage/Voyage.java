@@ -74,6 +74,7 @@ public class Voyage extends AbstractVoyage {
     		
     		animPhoto.setEcranFin(arrivee.getImage());
     		animPhoto.runAnimation();
+    		afficheEcran();
     		wait(1000);
     		animRoche.setEcranDeb(arrivee.getImage());
     		animSol.setEcranDeb(arrivee.getImage());
@@ -83,6 +84,7 @@ public class Voyage extends AbstractVoyage {
     			voyageur.takeEchantillonRoche(arrivee);
     			animRoche.setEcranFin(arrivee.getEchantillonRoche());
     			animRoche.runAnimation();
+    			afficheEcran();
     			wait(1000);
     			animSol.setEcranDeb(arrivee.getEchantillonRoche());
     			animPhoto.setEcranDeb(arrivee.getEchantillonRoche());
@@ -93,6 +95,7 @@ public class Voyage extends AbstractVoyage {
     			voyageur.takeEchantillonSol(arrivee);    			
     			animSol.setEcranFin(arrivee.getEchantillonSol());
     			animSol.runAnimation();
+    			afficheEcran();
     			wait(1000);
     			animPhoto.setEcranDeb(arrivee.getEchantillonSol());
     		}
