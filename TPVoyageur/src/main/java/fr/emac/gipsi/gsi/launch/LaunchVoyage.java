@@ -40,7 +40,7 @@ public class LaunchVoyage {
 		Planete p2 = new Planete();
 		p2.setColorName("DeepPink");
 		p2.setImage(ListScreen.second());
-		p2.setEchantillonRoche(ListScreen.second());
+		p2.setEchantillonRoche(ListScreen.ArcCiel());
 		p2.setEchantillonSol(ListScreen.second());
 		p2.getPos().setX(6);
 		p2.getPos().setY(2);
@@ -57,7 +57,7 @@ public class LaunchVoyage {
 		Planete plage = new Planete();
 		plage.setColorName("Red");
 		plage.setImage(ListScreen.Plage());
-		plage.setEchantillonSol(ListScreen.Plage());
+		plage.setEchantillonSol(ListScreen.Champi());
 		plage.getPos().setX(3);
 		plage.getPos().setY(3);
 		plage.getListAccessibilite().add(p2);
@@ -72,7 +72,7 @@ public class LaunchVoyage {
 		Planete pokemon = new Planete();
 		pokemon.setColorName("White");
 		pokemon.setImage(ListScreen.Pokeball());
-		pokemon.setEchantillonRoche(ListScreen.Pokeball());
+		pokemon.setEchantillonRoche(ListScreen.Plage());
 		pokemon.setEchantillonSol(ListScreen.Pokeball());
 		pokemon.getPos().setX(8);
 		pokemon.getPos().setY(7);
@@ -93,7 +93,7 @@ public class LaunchVoyage {
 		Planete colore = new Planete();
 		colore.setColorName("AliceBlue");
 		colore.setImage(ListScreen.Couleurs());
-		colore.setEchantillonRoche(ListScreen.Couleurs());
+		colore.setEchantillonRoche(ListScreen.Tetris());
 		colore.setEchantillonSol(ListScreen.Couleurs());
 		colore.getPos().setX(3);
 		colore.getPos().setY(6);
@@ -117,8 +117,8 @@ public class LaunchVoyage {
 		Planete rainbow = new Planete();
 		rainbow.setColorName("Linen");
 		rainbow.setImage(ListScreen.ArcCiel());
-		rainbow.setEchantillonRoche(ListScreen.ArcCiel());
-		rainbow.setEchantillonSol(ListScreen.ArcCiel());
+		rainbow.setEchantillonRoche(ListScreen.NyanCat());
+		rainbow.setEchantillonSol(ListScreen.Smiley());
 		rainbow.getPos().setX(7);
 		rainbow.getPos().setY(5);
 		rainbow.getListAccessibilite().add(pokemon);
