@@ -5,7 +5,6 @@ package fr.emac.gipsi.gsi.voyage;
 
 import fr.emac.gipsi.gsi.animation.AnimationCross;
 import fr.emac.gipsi.gsi.animation.AnimationGoutte;
-import fr.emac.gipsi.gsi.animation.AnimationNyanCat;
 import fr.emac.gipsi.gsi.animation.AnimationSpirale;
 import fr.emac.gipsi.gsi.ecran.ListScreen;
 import fr.emac.gipsi.gsi.screen.Screen;
@@ -102,7 +101,101 @@ public class Voyage extends AbstractVoyage {
     		voyageur.getAlreadyVisit().add(arrivee);
     	}
     }    
-    
+
+    /* tourne le robot pour qu'il fasse face à une planete visible
+     * Les gazeuses visibles sont forcément sur la même ligne ou la même colone que le robot.*/
+    public void faceAPlanete(AbstractVoyageur voyageur, Planete gazeuse) {
+    	int diffX = gazeuse.getPos().getX() - voyageur.getPosBody().getX();
+    	int diffY = gazeuse.getPos().getY() - voyageur.getPosBody().getY();
+    	if (voyageur.getDirection()=="E") {
+    		if (diffX == 0) {
+    			if (diffY < 0) {
+    				voyageur.turnRight();
+    				afficheEcran();
+    				wait(500);
+        			voyageur.turnRight();
+        			afficheEcran();
+        			wait(500);
+    			}
+    		}
+    		else if(diffX <0) {
+    			voyageur.turnLeft();
+				afficheEcran();
+				wait(500);
+    		}
+    		else {
+    			voyageur.turnRight();
+				afficheEcran();
+				wait(500);
+    		}
+    	}
+    	else if (voyageur.getDirection()=="N") {
+    		if (diffY == 0) {
+    			if (diffX > 0) {
+    				voyageur.turnRight();
+    				afficheEcran();
+    				wait(500);
+        			voyageur.turnRight();
+        			afficheEcran();
+        			wait(500);
+    			}
+    		}
+    		else if(diffY <0) {
+    			voyageur.turnLeft();
+				afficheEcran();
+				wait(500);
+    		}
+    		else {
+    			voyageur.turnRight();
+				afficheEcran();
+				wait(500);
+    		}
+    	}
+    	else if (voyageur.getDirection()=="O") {
+    		if (diffX == 0) {
+    			if (diffY > 0) {
+    				voyageur.turnRight();
+    				afficheEcran();
+    				wait(500);
+        			voyageur.turnRight();
+        			afficheEcran();
+        			wait(500);
+    			}
+    		}
+    		else if(diffX <0) {
+    			voyageur.turnRight();
+				afficheEcran();
+				wait(500);
+    		}
+    		else {
+    			voyageur.turnLeft();
+				afficheEcran();
+				wait(500);
+    		}
+    	}
+    	else {
+    		if (diffY == 0) {
+    			if (diffX < 0) {
+    				voyageur.turnRight();
+    				afficheEcran();
+    				wait(500);
+        			voyageur.turnRight();
+        			afficheEcran();
+        			wait(500);
+    			}
+    		}
+    		else if(diffY > 0) {
+    			voyageur.turnLeft();
+				afficheEcran();
+				wait(500);
+    		}
+    		else {
+    			voyageur.turnRight();
+				afficheEcran();
+				wait(500);
+    		}
+    	}
+    }
     
     /* déplace le robot d'une planète de depart à une planete d'arrivee */
     public void deplacement(Planete depart, AbstractVoyageur voyageur, Planete arrivee) { 
@@ -259,13 +352,88 @@ public class Voyage extends AbstractVoyage {
     		}
     	}
     }
- 
+    
+    /* Fonction qui prend pour argument l'ArrayList d'ArrayList de planete perm à modifier,
+     * la planete p qui doit être insérée successivent à toutes les positions de l'ArrayList en position j.
+	 * en interalant élément aux différentes positions possibles dans liste */
+	public void interposition(ArrayList<ArrayList<Planete>> perm, Planete p, int j) {
+		ArrayList<Planete> li = (ArrayList<Planete>)perm.get(j).clone();
+		perm.get(j).add(p);
+		for(int i=0; i<li.size(); i++) {
+			perm.add(j, (ArrayList<Planete>)li.clone());
+			perm.get(j).add(i, p);
+		}
+	}
+	
+	public void generePermutation(ArrayList<ArrayList<Planete>> perm, ArrayList<Planete> planetes) {
+		for (Planete p : planetes) {
+			int nbPerm = perm.size();
+			for (int j=nbPerm - 1; j>=0; j--) {
+				interposition(perm, p, j);
+			}
+		}
+	}	
+	
+	/* vérifie si il y a une gazeuse dans le voisinage à prendre en photo.*/
+	public void gazeuseVoisine(AbstractVoyageur voyageur, Planete planete, ArrayList<Planete> gazeuses, AnimationGoutte animPhoto, AnimationCross animRoche, AnimationSpirale animSol) {
+	  	for (Planete g : gazeuses) {
+	   		if (planete.getListVisibilite().contains(g)){
+	   			faceAPlanete(voyageur, g); // fait face à la gazeuse
+	   			
+	   			voyageur.takePicture(planete); // la prend en photo
+	    		animPhoto.setEcranFin(planete.getImage());
+	    		animPhoto.runAnimation();
+	    		afficheEcran();
+	    		wait(1000);
+	    		animRoche.setEcranDeb(planete.getImage());
+	    		animSol.setEcranDeb(planete.getImage());
+	    		
+	    		gazeuses.remove(gazeuses.indexOf(g));// l'enlève de la liste des gazeuses pas encore traitées
+	   		}
+	   	}
+	}
+	
     /* (non-Javadoc)
      * @see fr.emac.gipsi.gsi.voyage.AbstractVoyage#pilotageSimuler()
      */
     @Override
     public void lancementSimuler() {
         // TODO Auto-generated method stub 
+    	
+		int nbPlanete = listPlanete.size();
+		/* On fait la liste des planètes à visiter*/
+		ArrayList<Planete> aVisiter = new ArrayList<>();
+		for (Planete p : listPlanete) {
+			if (p.getEchantillonRoche() != null || p.getEchantillonSol() != null) {
+				aVisiter.add(p);
+			}
+		}
+		/* On fait la liste des planètes gazeuses */
+		ArrayList<Planete> gazeuse = new ArrayList<>();
+		for (Planete p : listPlanete) {
+			if (!aVisiter.contains(p)){
+				gazeuse.add(p);
+			}
+		}
+
+
+		/* On créer la liste des permutations
+		 * Attention, ces permutations ne sont pas forcéments des trajets viables*/
+		ArrayList<ArrayList<Planete>> permutation = new ArrayList<>();
+		ArrayList<Planete> listInit = new ArrayList<>();
+		listInit.add(aVisiter.get(0));
+		ArrayList<Planete> listTronquee = (ArrayList<Planete>)aVisiter.clone();
+		listTronquee.remove(0);
+		permutation.add(listInit);
+		generePermutation(permutation, listTronquee);
+
+
+		/* On créer la liste des planetes sur lesquelles on ne passe pas */
+		ArrayList<Planete> pasAVisiter = (ArrayList<Planete>)gazeuse.clone();
+		for (Planete g : gazeuse) {
+			//enlever g de pasAVisiter si on y passe en suivant le trajet opti
+		}
+
 		AnimationGoutte anim1 = new AnimationGoutte();
 		anim1.setEcranDeb(ListScreen.SpaceInvBleu());
 		AnimationCross anim2 = new AnimationCross();
@@ -273,12 +441,13 @@ public class Voyage extends AbstractVoyage {
 
     	afficheEcran();
     	wait(1000);
-    	
     	arriveeSurPlanete(getSimulatedvoyageur(), listPlanete.get(0), anim1, anim2, anim3);
+    	gazeuseVoisine(getSimulatedvoyageur(), listPlanete.get(0), pasAVisiter, anim1, anim2, anim3);
     	for( int i=0; i<listPlanete.size()-1; i++) {
     		deplacement(listPlanete.get(i), getSimulatedvoyageur(),listPlanete.get(i+1));
     		arriveeSurPlanete(getSimulatedvoyageur(), listPlanete.get(i+1), anim1, anim2, anim3);
-    		/*arriveeSurPlanete(getSimulatedvoyageur(), listPlanete.get(i+1), anim2);*/
+    		gazeuseVoisine(getSimulatedvoyageur(), listPlanete.get(i+1), pasAVisiter, anim1, anim2, anim3);
     	}
+
     }
 }

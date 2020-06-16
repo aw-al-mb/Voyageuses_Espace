@@ -142,7 +142,7 @@ public class LaunchVoyage {
 			p.setRayon(0);
 		}
 		
-		 
+		
 		/*On crée un nouveau voyageur */
 		AbstractVoyageur simulatedVoyageur = new VoyageurSimuler();
 		
@@ -155,8 +155,9 @@ public class LaunchVoyage {
 		
 		/*On crée un nouveau voyage avec la liste des planetes et le voyageur*/
 		Voyage voyage = new Voyage(listPlanete, simulatedVoyageur);
-		
+
 		/* On simule le voyage */
 		voyage.lancementSimuler();
+
 	}
 }
