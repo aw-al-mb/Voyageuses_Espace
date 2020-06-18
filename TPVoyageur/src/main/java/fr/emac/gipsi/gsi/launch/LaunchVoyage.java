@@ -28,7 +28,7 @@ public class LaunchVoyage {
 		/* On crée une planete p1 */
 		Planete p1 = new Planete();
 		p1.setColorName("DarkSalmon");
-		p1.setImage(ListScreen.first());
+		p1.setImage(ListScreen.Pokeball());
 		p1.getPos().setX(2);
 		p1.getPos().setY(2);
 		
@@ -145,13 +145,6 @@ public class LaunchVoyage {
 		
 		/*On crée un nouveau voyageur */
 		AbstractVoyageur simulatedVoyageur = new VoyageurSimuler();
-		
-		simulatedVoyageur.getPosTete().setX(listPlanete.get(0).getPos().getX());
-		simulatedVoyageur.getPosTete().setY(listPlanete.get(0).getPos().getY()+1);
-		simulatedVoyageur.getPosBody().setX(listPlanete.get(0).getPos().getX());
-		simulatedVoyageur.getPosBody().setY(listPlanete.get(0).getPos().getY()); // la tete regarde vers la droite
-		simulatedVoyageur.setDirection("E");
-		
 		
 		/*On crée un nouveau voyage avec la liste des planetes et le voyageur*/
 		Voyage voyage = new Voyage(listPlanete, simulatedVoyageur);
