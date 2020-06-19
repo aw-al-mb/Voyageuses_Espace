@@ -33,7 +33,7 @@ public class LaunchAnimation {
 
 		aa.wait(1000);
 		
-		AbstractAnimation ab = new AnimationLigne();
+		AbstractAnimation ab = new AnimationRandomPop();
 		ab.setEcranDeb(ListScreen.Couleurs());
 		ab.setEcranFin(ListScreen.Plage());
 
@@ -57,7 +57,7 @@ public class LaunchAnimation {
 		
 		ad.wait(1000);
 		
-		AbstractAnimation ae = new AnimationByColumn();
+		AbstractAnimation ae = new AnimationLigne();
 		ae.setEcranDeb(ListScreen.second());
 		ae.setEcranFin(ListScreen.ArcCiel());
 

@@ -3,14 +3,19 @@
  */
 package fr.emac.gipsi.gsi.voyage;
 
+import fr.emac.gipsi.gsi.animation.AbstractAnimation;
+import fr.emac.gipsi.gsi.animation.AnimationByColumn;
 import fr.emac.gipsi.gsi.animation.AnimationCross;
 import fr.emac.gipsi.gsi.animation.AnimationGoutte;
+import fr.emac.gipsi.gsi.animation.AnimationLigne;
+import fr.emac.gipsi.gsi.animation.AnimationRandomPop;
 import fr.emac.gipsi.gsi.animation.AnimationSpirale;
 import fr.emac.gipsi.gsi.ecran.ListScreen;
 import fr.emac.gipsi.gsi.voyageur.AbstractVoyageur;
 import fr.emac.gipsi.gsi.voyageur.VoyageurSimuler;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Truptil Sebastien - sebastien.truptil@gmail.com
@@ -63,14 +68,37 @@ public class Voyage extends AbstractVoyage {
         // TODO Auto-generated method stub
 
     }
-
+    
     /* Prend les photos et échantillons lors de l'arrivée sur une nouvelle planète */
-    public void arriveeSurPlanete(AbstractVoyageur voyageur, Planete arrivee, AnimationGoutte animPhoto, AnimationCross animRoche, AnimationSpirale animSol) {
+    public void arriveeSurPlanete(AbstractVoyageur voyageur, Planete arrivee, List<AbstractAnimation> listAnim) {
     	/* On vérifie que c'est la première fois qu'on passe par cette planète */
     	if (!voyageur.getAlreadyVisit().contains(arrivee)){
     		/* Prendre la photo de la planète */
     		voyageur.takePicture(arrivee);
     		
+    		int n = 6;
+    		
+    		int photoIndex = (int) (Math.random() * (n - 0));
+    		int rocheIndex = (int) (Math.random() * (n - 0));
+    		int solIndex = (int) (Math.random() * (n - 0));
+    		
+    		while (photoIndex == rocheIndex) 
+    		{
+        		rocheIndex = (int) (Math.random()*(n-0));
+        		System.out.println("boucle while1");
+    		}
+    		
+    		while ((solIndex == rocheIndex) || (solIndex == photoIndex)) 
+    		{
+        		solIndex = (int) (Math.random()*(n-0));
+        		System.out.println("boucle while2");
+
+    		}
+    		
+    		AbstractAnimation animPhoto = listAnim.get(photoIndex);
+    		AbstractAnimation animRoche = listAnim.get(rocheIndex);
+    		AbstractAnimation animSol = listAnim.get(solIndex);
+    		    		
     		animPhoto.setEcranFin(arrivee.getImage());
     		animPhoto.runAnimation();
     		afficheEcran();
@@ -504,7 +532,7 @@ public class Voyage extends AbstractVoyage {
 	}	
 // PROBLEME DE COPIE D'OBJET ??? (a verifier apres)	
 	/* Intercalle entre les planètes j-1 et j d'une permutation les planetes necessaires
-	 * pour aller de l'une à l'autre. Renvoi le nombre de planetes intercallées. */
+	 * pour aller de l'une à l'autre. Renvoie le nombre de planetes intercallées. */
 	public int ajoutePlanetes(ArrayList<Planete>[][]matrice, ArrayList<Planete> unePerm, int j) {
 		Planete depart = unePerm.get(j-1);
 		Planete arrivee = unePerm.get(j);
@@ -515,8 +543,31 @@ public class Voyage extends AbstractVoyage {
 	}
 	
 	/* vérifie si il y a une gazeuse dans le voisinage à prendre en photo.*/
-	public void gazeuseVoisine(AbstractVoyageur voyageur, Planete planete, ArrayList<Planete> gazeuses, AnimationGoutte animPhoto, AnimationCross animRoche, AnimationSpirale animSol) {
-	  	ArrayList<Integer> indiceAEnlever = new ArrayList<>();	  	
+	public void gazeuseVoisine(AbstractVoyageur voyageur, Planete planete, ArrayList<Planete> gazeuses, List<AbstractAnimation> listAnim) {
+	  	ArrayList<Integer> indiceAEnlever = new ArrayList<>();	 
+	  	
+	  	int photoIndex, rocheIndex, solIndex = 0;
+		int n = listAnim.size();
+		
+		photoIndex = (int) (Math.random()*(n-0));
+		rocheIndex = (int) (Math.random()*(n-0));
+		solIndex = (int) (Math.random()*(n-0));
+
+		while (photoIndex == rocheIndex) 
+		{
+    		rocheIndex = (int) (Math.random()*(n-0));
+		}
+		
+		while (solIndex == rocheIndex || solIndex == photoIndex) 
+		{
+    		rocheIndex = (int) (Math.random()*(n-0));
+		}
+		
+		AbstractAnimation animPhoto = listAnim.get(photoIndex);
+		AbstractAnimation animRoche = listAnim.get(rocheIndex);
+		AbstractAnimation animSol = listAnim.get(solIndex);
+	  	
+		
 		for (Planete g : gazeuses) {
 	   		if (planete.getListVisibilite().contains(g)){
 	   			faceAPlanete(voyageur, g); // fait face à la gazeuse
@@ -712,27 +763,38 @@ public class Voyage extends AbstractVoyage {
 		// On réinitiale notre voyageur pour qu'il commence bien avec une énergie à 0.
 		AbstractVoyageur voyageurFinal = new VoyageurSimuler();
     	setSimulatedvoyageur(voyageurFinal);
+    	
     	// On le place sur sa première étape.
 		getSimulatedvoyageur().getPosTete().setX(listOpti.get(0).getPos().getX());
 		getSimulatedvoyageur().getPosTete().setY(listOpti.get(0).getPos().getY()+1);
 		getSimulatedvoyageur().getPosBody().setX(listOpti.get(0).getPos().getX());
 		getSimulatedvoyageur().getPosBody().setY(listOpti.get(0).getPos().getY());
+		
 		// la tete regarde vers la droite
 		getSimulatedvoyageur().setDirection("E");
 
-		AnimationGoutte anim1 = new AnimationGoutte();
-		anim1.setEcranDeb(ListScreen.SpaceInvBleu());
-		AnimationCross anim2 = new AnimationCross();
-		AnimationSpirale anim3 = new AnimationSpirale();
-
-    	afficheEcran();
+		List<AbstractAnimation> listAnim = new ArrayList<AbstractAnimation>();
+		listAnim.add(new AnimationByColumn());
+		listAnim.add(new AnimationGoutte());
+		listAnim.add(new AnimationLigne());
+		listAnim.add(new AnimationRandomPop());
+		listAnim.add(new AnimationSpirale());
+		listAnim.add(new AnimationCross());
+				
+		for (AbstractAnimation animation : listAnim)
+		{
+			animation.setEcranDeb(ListScreen.StarScreen());
+		}
+		
+		afficheEcran();
     	wait(1000);
-    	arriveeSurPlanete(getSimulatedvoyageur(), listOpti.get(0), anim1, anim2, anim3);
-    	gazeuseVoisine(getSimulatedvoyageur(), listOpti.get(0), pasAVisiter, anim1, anim2, anim3);
+    	
+    	arriveeSurPlanete(getSimulatedvoyageur(), listOpti.get(0), listAnim);
+    	gazeuseVoisine(getSimulatedvoyageur(), listOpti.get(0), pasAVisiter, listAnim);
     	for( int i=0; i<listOpti.size()-1; i++) {
     		deplacement(listOpti.get(i), getSimulatedvoyageur(),listOpti.get(i+1));
-    		arriveeSurPlanete(getSimulatedvoyageur(), listOpti.get(i+1), anim1, anim2, anim3);
-    		gazeuseVoisine(getSimulatedvoyageur(), listOpti.get(i+1), pasAVisiter, anim1, anim2, anim3);
+    		arriveeSurPlanete(getSimulatedvoyageur(), listOpti.get(i+1), listAnim);
+    		gazeuseVoisine(getSimulatedvoyageur(), listOpti.get(i+1), pasAVisiter, listAnim);
     	}
 
     }
