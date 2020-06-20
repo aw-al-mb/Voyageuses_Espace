@@ -26,11 +26,11 @@ public class LaunchVoyage {
 		ArrayList<Planete> listPlanete = new ArrayList<>();
 		
 		/* On crée une planete p1 */
+		// Planete gazeuse
 		Planete p1 = new Planete();
 		p1.setColorName("DarkSalmon");
 		p1.setImage(ListScreen.first());
-		/*p1.setEchantillonSol(ListScreen.second());*/
-		p1.getPos().setX(2);
+		p1.getPos().setX(5);
 		p1.getPos().setY(2);
 		
 		/* On l'ajoute à la liste des planetes */
@@ -42,7 +42,6 @@ public class LaunchVoyage {
 		vacances.setColorName("Aqua");
 		vacances.setImage(ListScreen.Plage());
 		vacances.setEchantillonRoche(ListScreen.water());
-		vacances.setEchantillonSol(ListScreen.Plage());
 		vacances.getPos().setX(6);
 		vacances.getPos().setY(2);
 		vacances.getListAccessibilite().add(p1);
@@ -61,11 +60,11 @@ public class LaunchVoyage {
 		ciel.setEchantillonSol(ListScreen.ArcCiel());
 		ciel.getPos().setX(3);
 		ciel.getPos().setY(3);
-		ciel.getListAccessibilite().add(vacances);
-		ciel.getListVisibilite().add(vacances);
+		ciel.getListAccessibilite().add(p1);
+		ciel.getListVisibilite().add(p1);
 		
-		vacances.getListAccessibilite().add(ciel);
-		vacances.getListVisibilite().add(ciel);
+		p1.getListAccessibilite().add(ciel);
+		p1.getListVisibilite().add(ciel);
 
 		listPlanete.add(ciel);
 		
@@ -73,44 +72,26 @@ public class LaunchVoyage {
 		Planete pokemon = new Planete();
 		pokemon.setColorName("Red");
 		pokemon.setImage(ListScreen.Pokeball());
-		pokemon.setEchantillonRoche(ListScreen.Pokeball());
 		pokemon.setEchantillonSol(ListScreen.pikachu());
 		pokemon.getPos().setX(8);
 		pokemon.getPos().setY(7);
-		pokemon.getListAccessibilite().add(ciel);
-		pokemon.getListVisibilite().add(ciel);
-		
-		pokemon.getListVisibilite().add(vacances);
-		
-		ciel.getListAccessibilite().add(pokemon);
-		ciel.getListVisibilite().add(pokemon);
-		
+				
 		vacances.getListVisibilite().add(pokemon);
-
 		
 		listPlanete.add(pokemon);
 		
 		
+		// Planete gazeuse
 		Planete random = new Planete();
 		random.setColorName("AliceBlue");
 		random.setImage(ListScreen.Couleurs());
-		/*random.setEchantillonRoche(ListScreen.Couleurs());
-		random.setEchantillonSol(ListScreen.Smiley());*/
 		random.getPos().setX(3);
 		random.getPos().setY(6);
-		random.getListAccessibilite().add(pokemon);
-		random.getListVisibilite().add(pokemon);
 		random.getListAccessibilite().add(ciel);
 		random.getListVisibilite().add(ciel);
-		
-		random.getListVisibilite().add(vacances);
 
-		pokemon.getListAccessibilite().add(random);
-		pokemon.getListVisibilite().add(random);
 		ciel.getListAccessibilite().add(random);
 		ciel.getListVisibilite().add(random);
-		
-		vacances.getListVisibilite().add(random);
 		
 		listPlanete.add(random);
 		
@@ -118,97 +99,74 @@ public class LaunchVoyage {
 		Planete spaceInv = new Planete();
 		spaceInv.setColorName("Chartreuse");
 		spaceInv.setImage(ListScreen.SpaceInvVert());
-		spaceInv.setEchantillonRoche(ListScreen.SpaceInvVert());
 		spaceInv.setEchantillonSol(ListScreen.SpaceInvBleu());
 		spaceInv.getPos().setX(7);
 		spaceInv.getPos().setY(5);
 		spaceInv.getListAccessibilite().add(pokemon);
 		spaceInv.getListVisibilite().add(pokemon);
-		spaceInv.getListAccessibilite().add(random);
-		spaceInv.getListVisibilite().add(random);
+		spaceInv.getListAccessibilite().add(vacances);
+		spaceInv.getListVisibilite().add(vacances);
 		
-		spaceInv.getListVisibilite().add(ciel);
 		pokemon.getListAccessibilite().add(spaceInv);
 		pokemon.getListVisibilite().add(spaceInv);
-		random.getListAccessibilite().add(spaceInv);
-		random.getListVisibilite().add(spaceInv);
-
-		ciel.getListVisibilite().add(spaceInv);
+		vacances.getListAccessibilite().add(spaceInv);
+		vacances.getListVisibilite().add(spaceInv);
 		
 		listPlanete.add(spaceInv);
 		
 		Planete retro = new Planete();
 		retro.setColorName("Gold");
 		retro.setImage(ListScreen.Tetris());
-		retro.setEchantillonRoche(ListScreen.Tetris());
-		retro.setEchantillonSol(ListScreen.tetris2());
+		retro.setEchantillonRoche(ListScreen.tetris2());
 		retro.getPos().setX(8);
 		retro.getPos().setY(2);
 		retro.getListAccessibilite().add(pokemon);
 		retro.getListVisibilite().add(pokemon);
-		retro.getListAccessibilite().add(random);
-		retro.getListVisibilite().add(random);
 		retro.getListAccessibilite().add(vacances);
 		retro.getListVisibilite().add(vacances);
+		retro.getListAccessibilite().add(spaceInv);
 		retro.getListVisibilite().add(spaceInv);
 		
 		pokemon.getListAccessibilite().add(retro);
 		pokemon.getListVisibilite().add(retro);
-		random.getListAccessibilite().add(retro);
-		random.getListVisibilite().add(retro);
+		spaceInv.getListAccessibilite().add(retro);
+		spaceInv.getListVisibilite().add(retro);
 		vacances.getListAccessibilite().add(retro);
 		vacances.getListVisibilite().add(retro);
-		spaceInv.getListVisibilite().add(retro);
 		
 		listPlanete.add(retro);
 		
 		Planete Mario = new Planete();
 		Mario.setColorName("MediumBlue");
 		Mario.setImage(ListScreen.boite());
-		Mario.setEchantillonRoche(ListScreen.boite());
+		Mario.setEchantillonRoche(ListScreen.mario());
 		Mario.setEchantillonSol(ListScreen.Champi());
 		Mario.getPos().setX(5);
 		Mario.getPos().setY(11);
 		
-		Mario.getListAccessibilite().add(pokemon);
-		Mario.getListVisibilite().add(pokemon);
-		Mario.getListAccessibilite().add(retro);
-		Mario.getListVisibilite().add(retro);
-		Mario.getListAccessibilite().add(ciel);
-		Mario.getListVisibilite().add(ciel);
 		Mario.getListVisibilite().add(p1);
-		
-		pokemon.getListAccessibilite().add(Mario);
-		pokemon.getListVisibilite().add(Mario);
-		retro.getListAccessibilite().add(Mario);
-		retro.getListVisibilite().add(Mario);
-		ciel.getListAccessibilite().add(Mario);
-		ciel.getListVisibilite().add(Mario);
-
 		p1.getListVisibilite().add(Mario);
+		
 		listPlanete.add(Mario);
 		
 		
 		Planete Lol = new Planete();
 		Lol.setColorName("OrangeRed");
 		Lol.setImage(ListScreen.NyanCat());
-		Lol.setEchantillonRoche(ListScreen.NyanCat());
 		Lol.setEchantillonSol(ListScreen.Smiley());
 		Lol.getPos().setX(8);
 		Lol.getPos().setY(8);
 		
-		Lol.getListAccessibilite().add(vacances);
-		Lol.getListVisibilite().add(vacances);
-		Lol.getListAccessibilite().add(ciel);
-		Lol.getListVisibilite().add(ciel);
+		Lol.getListAccessibilite().add(pokemon);
 		Lol.getListVisibilite().add(pokemon);
+		Lol.getListAccessibilite().add(Mario);
+		Lol.getListVisibilite().add(Mario);
 		
-		vacances.getListAccessibilite().add(Lol);
-		vacances.getListVisibilite().add(Lol);
-		ciel.getListAccessibilite().add(Lol);
-		ciel.getListVisibilite().add(Lol);
-
+		pokemon.getListAccessibilite().add(Lol);
 		pokemon.getListVisibilite().add(Lol);
+		Mario.getListAccessibilite().add(Lol);
+		Mario.getListVisibilite().add(Lol);
+		
 		listPlanete.add(Lol);
 		
 		
@@ -216,27 +174,22 @@ public class LaunchVoyage {
 		banquise.setColorName("PaleTurquoise");
 		banquise.setImage(ListScreen.pinguoin());
 		banquise.setEchantillonRoche(ListScreen.flocon());
-		banquise.setEchantillonSol(ListScreen.pinguoin());
-		banquise.getPos().setX(4);
+		banquise.getPos().setX(3);
 		banquise.getPos().setY(12);
 		
-		banquise.getListAccessibilite().add(retro);
-		banquise.getListVisibilite().add(retro);
-		banquise.getListAccessibilite().add(pokemon);
-		banquise.getListVisibilite().add(pokemon);
-		banquise.getListAccessibilite().add(Lol);
-		banquise.getListVisibilite().add(Lol);
-		
+		banquise.getListAccessibilite().add(random);
 		banquise.getListVisibilite().add(random);
+		banquise.getListAccessibilite().add(spaceInv);
+		banquise.getListVisibilite().add(spaceInv);
+		banquise.getListAccessibilite().add(Mario);
+		banquise.getListVisibilite().add(Mario);
 		
-		retro.getListAccessibilite().add(banquise);
-		retro.getListVisibilite().add(banquise);
-		pokemon.getListAccessibilite().add(banquise);
-		pokemon.getListVisibilite().add(banquise);
-		Lol.getListAccessibilite().add(banquise);
-		Lol.getListVisibilite().add(banquise);
-		
+		random.getListAccessibilite().add(banquise);
 		random.getListVisibilite().add(banquise);
+		spaceInv.getListAccessibilite().add(banquise);
+		spaceInv.getListVisibilite().add(banquise);
+		Mario.getListAccessibilite().add(banquise);
+		Mario.getListVisibilite().add(banquise);
 		
 		listPlanete.add(banquise);
 		
@@ -245,26 +198,14 @@ public class LaunchVoyage {
 		noel.setColorName("Green");
 		noel.setImage(ListScreen.sapin());
 		noel.setEchantillonRoche(ListScreen.kdo());
-		noel.setEchantillonSol(ListScreen.sapin());
+		noel.setEchantillonSol(ListScreen.flocon());
 		noel.getPos().setX(1);
 		noel.getPos().setY(4);
 		
-		noel.getListAccessibilite().add(vacances);
-		noel.getListVisibilite().add(vacances);
-		noel.getListAccessibilite().add(pokemon);
-		noel.getListVisibilite().add(pokemon);
-		noel.getListAccessibilite().add(p1);
-		noel.getListVisibilite().add(p1);
-		
+		noel.getListAccessibilite().add(ciel);
 		noel.getListVisibilite().add(ciel);
 		
-		vacances.getListAccessibilite().add(noel);
-		vacances.getListVisibilite().add(noel);
-		pokemon.getListAccessibilite().add(noel);
-		pokemon.getListVisibilite().add(noel);
-		p1.getListAccessibilite().add(noel);
-		p1.getListVisibilite().add(noel);
-		
+		ciel.getListAccessibilite().add(noel);
 		ciel.getListVisibilite().add(noel);
 		
 		listPlanete.add(noel);
